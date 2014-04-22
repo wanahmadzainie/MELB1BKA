@@ -1,8 +1,6 @@
 CC	= gcc
-#CFLAGS	+= $(shell pkg-config --cflags opencv)
 CFLAGS  += -I/usr/include/opencv
 LDFLAGS	+= -lopencv_core -lopencv_highgui -lopencv_imgproc -ljpeg -lpthread
-LIBS 	+= $(shell pkg-config --libs opencv) -ljpeg
 
 all: clean hw1 hw2_server hw2_client
 
