@@ -38,7 +38,7 @@
 
 #define	MAX_WIDTH	640
 #define	MAX_HEIGHT	480
-#define	QUALITY		25
+#define	QUALITY		100
 
 uint8_t	*buffer;
 uint8_t	bufRGB[MAX_WIDTH*MAX_HEIGHT*3];

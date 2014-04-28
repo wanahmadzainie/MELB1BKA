@@ -41,9 +41,14 @@
 
 #include <jpeglib.h>
 
-#define	JPEG_QUALITY	20
 #define	MAX_WIDTH		640
 #define	MAX_HEIGHT		480
+#ifndef MSG_LENGTH
+#define	MSG_LENGTH		(500*1024)
+#endif
+#ifndef	JPEG_QUALITY
+#define	JPEG_QUALITY	25
+#endif
 
 #define PORT 8888
 
@@ -201,7 +206,7 @@ void* streamServer(void* arg)
 	}
 
 	/* the size of the data to be sent */
-	int imgsize = img1->imageSize;
+	int imgsize = MSG_LENGTH;//img1->imageSize;
 	int bytes, i;
 
 	/* start sending images */

@@ -25,6 +25,9 @@
 
 #define	MAX_WIDTH		640
 #define	MAX_HEIGHT		480
+#ifndef MSG_LENGTH
+#define	MSG_LENGTH		(500*1024)
+#endif
 uint8_t	bufRGB[MAX_WIDTH * MAX_HEIGHT *3];
 uint8_t	bufJPG[MAX_WIDTH * MAX_HEIGHT *3];
 
@@ -104,7 +107,7 @@ void* streamClient(void* arg)
 	if (connect(sock, (struct sockaddr*)&server, sizeof(server)) < 0) {
 		quit("connect() failed.", 1);
 	}
-	int  imgsize = img->imageSize;
+	int  imgsize = MSG_LENGTH;//img->imageSize;
 	char sockdata[imgsize];
 	int  i, j, k, bytes;
 	/* start receiving images */
