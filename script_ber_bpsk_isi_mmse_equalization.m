@@ -86,10 +86,4 @@ legend('sim-zf', 'sim-mmse');
 xlabel('Eb/No, dB');
 ylabel('Bit Error Rate');
 title('Bit error probability curve for BPSK in ISI with MMSE equalizer');
-
-
-
-
-
-
-
+print("q2mmse.jpg");

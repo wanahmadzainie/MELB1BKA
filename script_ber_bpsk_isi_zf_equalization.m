@@ -79,4 +79,4 @@ legend('sim-3tap', 'sim-5tap','sim-7tap','sim-9tap');
 xlabel('Eb/No, dB');
 ylabel('Bit Error Rate');
 title('Bit error probability curve for BPSK in ISI with ZF equalizer');
-
+print("q2zf.jpg");
