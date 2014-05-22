@@ -120,6 +120,7 @@ int main(int argc, char** argv)
 
 	cvZero(img1);
 	cvNamedWindow("stream_server", CV_WINDOW_AUTOSIZE);
+	cvMoveWindow("stream_server", 0, 0);
 
 	/* print the width and height of the frame, needed by the client */
 	fprintf(stdout, "width:  %d\nheight: %d\n\n", img0->width, img0->height);

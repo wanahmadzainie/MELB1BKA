@@ -13,6 +13,6 @@ hw2_server:
 
 hw2_client:
 	$(CC) $(CFLAGS) -o hw2_client hw2_client.c $(LDFLAGS)
-		
+
 clean:
 	$(RM) -rf *.jpg *.o hw1 hw2_server hw2_client

@@ -1,3 +1,21 @@
+/*
+ * MET1323: Broadband Multimedia Networks
+ *
+ * hw2_client.c
+ *
+ * Objective:
+ * 1. Receive stream of JPEG images.
+ * 2. Decompress frame.
+ * 3. Display raw image.
+ *
+ * CREDITS:-
+ * Adapted from
+ * 1) http://nashruddin.com/StrEAMinG_oPENcv_vIdEos_ovER_tHe_nEtWoRk
+ * 2) http://coderecipes.blogspot.com/2012/07/how-to-decompress-jpeg-images-using.html
+ * 3) https://github.com/alishir/IGT_net/tree/master/igt_server
+ *
+ */
+
 /**
 * stream_client.c:
 * OpenCV video streaming client
@@ -63,6 +81,7 @@ int main(int argc, char** argv)
 	}
 	fprintf(stdout, "Press 'q' to quit.\n\n");
 	cvNamedWindow("stream_client", CV_WINDOW_AUTOSIZE);
+	cvMoveWindow("stream_client", 680, 0);
 	while(key != 'q') {
 		/**
 		 * Display the received image, make it thread safe
