@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////-
-// Design unit: testbench (Module)
+// Design unit: Data Path Unit (Module)
 //            :
-// File name  : testbench.v
+// File name  : du.v
 //            :
-// Description: Test Bench for RTL Vending Machine
+// Description: Data Path Unit for Vending Machine
 //            :
 // Limitations: None
-//            : 
+//            :
 // System     : Verilog
 //            :
 // Author     : Wan Ahmad Zainie bin Wan Mohamad
@@ -15,3 +15,10 @@
 //
 // Revision   : Version 0.0 2014-05-30
 ////////////////////////////////////////////////////////////////////-
+
+module du(dummy_in, dummy_out);
+	input	dummy_in;
+	output	dummy_out;
+
+	assign dummy_out = ~dummy_in;
+endmodule

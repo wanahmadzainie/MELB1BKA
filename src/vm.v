@@ -1,12 +1,12 @@
 ////////////////////////////////////////////////////////////////////-
-// Design unit: testbench (Module)
+// Design unit: vm (All In One)
 //            :
-// File name  : testbench.v
+// File name  : vm.v
 //            :
-// Description: Test Bench for RTL Vending Machine
+// Description: RTL Design of Vending Machine
 //            :
 // Limitations: None
-//            : 
+//            :
 // System     : Verilog
 //            :
 // Author     : Wan Ahmad Zainie bin Wan Mohamad
@@ -15,3 +15,10 @@
 //
 // Revision   : Version 0.0 2014-05-30
 ////////////////////////////////////////////////////////////////////-
+
+module vm(dummy_in, dummy_out);
+	input	dummy_in;
+	output	dummy_out;
+
+	assign dummy_out = ~dummy_in;
+endmodule

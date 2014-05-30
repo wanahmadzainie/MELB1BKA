@@ -1,26 +1,24 @@
 ////////////////////////////////////////////////////////////////////-
-// Design unit: vm_fsm (Module)
+// Design unit: Control Unit (Module)
 //            :
-// File name  : vm_fsm.v
+// File name  : cu.v
 //            :
-// Description: finite state machine for vending machine
+// Description: Control Unit of Vending Machine
 //            :
 // Limitations: None
-//            : 
+//            :
 // System     : Verilog
 //            :
 // Author     : Wan Ahmad Zainie bin Wan Mohamad
 //            : ME131135
-//            : Fakulti Kejuruteraan Elektrik
-//            : Universiti Teknologi Malaysia
 //            : wanahmadzainie@gmail.com
 //
-// Revision   : Version 0.0 2014-04-01
+// Revision   : Version 0.0 2014-05-30
 ////////////////////////////////////////////////////////////////////-
 
-module vm_fsm(dummy_in, dummy_out);
-	input		dummy_in;
+module cu(dummy_in, dummy_out);
+	input	dummy_in;
 	output	dummy_out;
-	
+
 	assign dummy_out = ~dummy_in;
 endmodule
