@@ -16,26 +16,31 @@
 //
 // Revision   : Version 0.1 2014-06-01
 //            : Version 1.0 2014-06-09 Ready for submission
+//            : Version 2.0 2014-06-10 Change to behavioral
 ////////////////////////////////////////////////////////////////////-
 
-module vm(clk, rst, deposit, deposited, select, selected, price, cancel,
-			maintenance, refund, refundall, depositall, product, balance, state);
+module vm(clk, rst, deposit, deposited, select, selected, price, cancel, maintenance,
+			refund, refundall, depositall, product, change, state);
 	input 	clk, rst;
 	input	[9:0] deposit, price;
 	input	[4:0] select;
 	input	deposited, selected, cancel, maintenance;
 	output	refund, refundall, depositall;
 	output	[4:0] product;
-	output	[9:0] balance;
+	output	[9:0] change;
 	output	[2:0] state;
-	wire	ldRdeposit, ldRselect, ldRprice, ldRout;
-	wire	clrR, clrA, clrRout, ldA, ldM;
-	wire	drop;
+	wire	ldRdeposit, ldRselect, ldRprice, ldA, ldRproduct, ldRchange;
+	wire	ldRpurchase, ldMprice, ldMquantity, clrRdeposit, clrRselect;
+	wire	clrRprice, clrA, clrRproduct, clrRchange, clrRpurchase, purchase;
 
 	du myDU(clk, rst, deposit, select, price, ldRdeposit, ldRselect, ldRprice,
-			ldRout, clrR, clrA, clrRout, ldA, ldM, drop, refund, product, balance);
+			ldA, ldRproduct, ldRchange, ldRpurchase, ldMprice, ldMquantity,
+			clrRdeposit, clrRselect, clrRprice, clrA, clrRproduct, clrRchange,
+			clrRpurchase, purchase, refund, product, change);
 
-	cu myCU(clk, rst, deposited, selected, cancel, maintenance, drop,
-			ldRdeposit, ldRselect, ldRprice, ldRout, ldA, ldM,
-			clrR, clrA, clrRout, refundall, depositall, state);
+	cu myCU(clk, rst, deposited, selected, cancel, maintenance, purchase,
+			ldRdeposit, ldRselect, ldRprice, ldA, ldRproduct, ldRchange,
+			ldRpurchase, ldMprice, ldMquantity, clrRdeposit, clrRselect,
+			clrRprice, clrA, clrRproduct, clrRchange, clrRpurchase,
+			refundall, depositall, state);
 endmodule

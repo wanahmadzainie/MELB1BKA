@@ -16,20 +16,25 @@
 //
 // Revision   : Version 0.1 2014-05-30 Initial
 //            : Version 1.0 2014-06-09 Ready for submission
+//            : Version 2.0 2014-06-10 Change to behavioral
 ////////////////////////////////////////////////////////////////////-
 
-module cu(clk, rst, deposited, selected, cancel, maintenance, drop,
-			ldRdeposit, ldRselect, ldRprice, ldRout, ldA, ldM,
-			clrR, clrA, clrRout, refundall, depositall, state);
+module cu(clk, rst, deposited, selected, cancel, maintenance, purchase,
+			ldRdeposit, ldRselect, ldRprice, ldA, ldRproduct, ldRchange,
+			ldRpurchase, ldMprice, ldMquantity, clrRdeposit, clrRselect,
+			clrRprice, clrA, clrRproduct, clrRchange, clrRpurchase,
+			refundall, depositall, state);
 	input	clk, rst;
-	input	deposited, selected, cancel, maintenance, drop;
-	output	ldRdeposit, ldRselect, ldRprice, ldRout;
-	output	ldA, ldM, clrR, clrA, clrRout, refundall, depositall;
+	input	deposited, selected, cancel, maintenance, purchase;
+	output	ldRdeposit, ldRselect, ldRprice, ldA, ldRproduct, ldRchange;
+	output	ldRpurchase, ldMprice, ldMquantity, clrRdeposit, clrRselect;
+	output	clrRprice, clrA, clrRproduct, clrRchange, clrRpurchase;
+	output	refundall, depositall;
 	output	[2:0] state;
 	reg		[2:0] pstate, nstate;
-	reg		[8:0] cv;
+	reg		[15:0] cv;
 	parameter	S_init = 3'b000, S_wait = 3'b001, S_deposit = 3'b010, 
-				S_cancel = 3'b011, S_select = 3'b100, S_drop = 3'b101, 
+				S_cancel = 3'b011, S_select = 3'b100, S_purchase = 3'b101, 
 				S_maintenance = 3'b110;
 
 	// state register submodule
@@ -38,56 +43,60 @@ module cu(clk, rst, deposited, selected, cancel, maintenance, drop,
 		else			pstate <= nstate;
 	end
 
-	// next state logic, output logic
-	always @ (pstate or cancel or maintenance or deposited or selected or drop) begin
+	// next state logic
+	always @ (pstate or cancel or maintenance or deposited or selected or purchase) begin
 		case (pstate)
-			S_init: begin
+			S_init:
 				nstate = S_wait;
-				cv = 9'b0_0000_0111;
-			end
-			S_wait: begin
+			S_wait:
 				if (maintenance)	nstate = S_maintenance;
 				else if (deposited)	nstate = S_deposit;
-				else if (selected)	nstate = S_select;
 				else if (cancel)	nstate = S_cancel;
-				else if (drop)		nstate = S_drop;
+				else if (selected)	nstate = S_select;
 				else				nstate = S_wait;
-			end
-			S_deposit: begin
-				if (deposited) begin	nstate = S_deposit; cv = 9'b0_1000_1001; end
-				else begin				nstate = S_wait; cv = 9'b0_0000_0001; end
-			end
-			S_cancel: begin
-				nstate = S_wait; cv = 9'b0_0000_0111;
-			end
-			S_select: begin
-				if (drop) begin	nstate = S_drop; cv = 9'b0_0001_0000; end
-				else begin		nstate = S_wait; cv = 9'b0_0100_0001; end
-			end
-			S_drop: begin
-				nstate = S_wait; cv = 9'b0_0000_0111;
-			end
-			S_maintenance: begin
-				if (maintenance) begin
-					nstate = S_maintenance;
-					if (selected)	cv = 9'b1_0110_0011;
-					else			cv = 9'b0_0000_0001;
-				end
-				else begin	nstate = S_wait; cv = 9'b0_0000_0111; end
-			end
+			S_select:
+				if (purchase)		nstate = S_purchase;
+				else				nstate = S_wait;
+			S_purchase:				nstate = S_init;
+			S_maintenance:
+				if (maintenance)	nstate = S_maintenance;
+				else				nstate = S_init;
+			default:				nstate = S_wait;
+		endcase
+	end
+
+	// output logic
+	always @ (pstate or selected) begin
+		case (pstate)
+			S_init:				cv = 16'b0011_1111_1000_0000;
+			S_wait:				cv = 16'b0011_1000_0000_0111;
+			S_deposit:			cv = 16'b0011_1011_0000_1001;
+			S_cancel:			cv = 16'b0011_1111_1000_0000;
+			S_select:			cv = 16'b0001_1010_1100_0000;
+			S_purchase:			cv = 16'b1010_0010_1011_0000;
+			S_maintenance:
+				if (selected)	cv = 16'b0111_1100_1000_0110;
+				else			cv = 16'b0011_1100_1000_0000;
 		endcase
 	end
 
 	assign state = pstate;
-	assign ldM			= cv[8];
-	assign ldRdeposit	= cv[7];
-	assign ldRselect	= cv[6];
-	assign ldRprice		= cv[5];
-	assign ldRout		= cv[4];
+	assign ldRdeposit	= cv[0];
+	assign ldRselect	= cv[1];
+	assign ldRprice		= cv[2];
 	assign ldA			= cv[3];
-	assign clrR			= cv[2];
-	assign clrA			= cv[1];
-	assign clrRout		= cv[0];
-	assign refundall	= (state == S_cancel) ? 1'b1 : 1'b0;
-	assign depositall	= (state == S_drop)   ? 1'b1 : 1'b0;
+	assign ldRproduct	= cv[4];
+	assign ldRchange	= cv[5];
+	assign ldRpurchase	= cv[6];
+	assign clrRdeposit	= cv[7];
+	assign clrRselect	= cv[8];
+	assign clrRprice	= cv[9];
+	assign clrA			= cv[10];
+	assign clrRproduct	= cv[11];
+	assign clrRchange	= cv[12];
+	assign clrRpurchase	= cv[13];
+	assign ldMprice		= cv[14];
+	assign ldMquantity	= cv[15];
+	assign refundall	= (state == S_cancel || state == S_maintenance) ? 1'b1 : 1'b0;
+	assign depositall	= (state == S_purchase)   ? 1'b1 : 1'b0;
 endmodule

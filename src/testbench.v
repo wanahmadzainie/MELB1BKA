@@ -16,6 +16,7 @@
 //
 // Revision   : Version 0.1 2014-06-01
 //            : Version 1.0 2014-06-09 Ready for submission
+//            : Version 2.0 2014-06-10 Change to behavioral - more simulation
 ////////////////////////////////////////////////////////////////////-
 
 `timescale 100ns / 1ns
@@ -30,7 +31,7 @@ module testbench();
 	// outputs
 	wire	refund, refundall, depositall;
 	wire	[4:0] product;
-	wire	[9:0] balance;
+	wire	[9:0] change;
 	wire	[2:0] state;
 
 	// instantiation
@@ -48,9 +49,15 @@ module testbench();
 		.refundall(refundall),
 		.depositall(depositall),
 		.product(product),
-		.balance(balance),
+		.change(change),
 		.state(state)
 	);
+
+// for future use
+//	initial begin
+//		$display("time: rst, clk");
+//		$monitor(" %0d:  %b,  %b", $time, rst, clk);
+//	end
 
 	initial begin
 		clk= 0;
@@ -62,46 +69,72 @@ module testbench();
 		rst= 0;
 		#10;
 		#10		rst= 1;
-		#10		maintenance= 1;
-		#10		selected= 1; select =  0; price= 100;
-		#10		selected= 1; select = 31; price= 100;
-		#10		selected= 1; select =  1; price= 150;
-		#10		selected= 1; select =  2; price= 100;
-		#10		selected= 1; select =  3; price= 200;
-		#10		selected= 1; select =  4; price= 100;
-		#10		selected= 1; select =  5; price= 150;
-		#10		selected= 1; select =  6; price= 150;
-		#10		selected= 1; select =  7; price= 150;
-		#10		selected= 1; select =  8; price= 100;
-		#10		selected= 1; select =  9; price= 100;
-		#10		selected= 1; select = 10; price= 100;
-		#10		selected= 1; select = 11; price= 100;
-		#10		selected= 1; select = 12; price= 100;
-		#10		selected= 1; select = 13; price= 100;
-		#10		selected= 1; select = 14; price= 100;
-		#10		selected= 1; select = 15; price= 100;
-		#10		selected= 1; select = 16; price= 100;
-		#10		selected= 1; select = 17; price= 100;
-		#10		selected= 1; select = 18; price= 100;
-		#10		selected= 1; select = 19; price= 100;
-		#10		selected= 1; select = 20; price= 100;
-		#10		selected= 1; select = 21; price= 100;
-		#10		selected= 1; select = 22; price= 100;
-		#10		selected= 1; select = 23; price= 100;
-		#10		selected= 1; select = 24; price= 100;
-		#10		selected= 1; select = 25; price= 100;
-		#10		selected= 1; select = 26; price= 100;
-		#10		selected= 1; select = 27; price= 100;
-		#10		selected= 1; select = 28; price= 200;
-		#10		selected= 1; select = 29; price= 200;
-		#10		selected= 1; select = 30; price= 200;
-		#10		selected= 1; select = 31; price= 200;
-		#10		selected= 0; maintenance = 0;
+// simulate overflow, insert payment more than threshold value
+		#20		deposited= 1; deposit= 100;
+		#20		deposited= 1; deposit= 200;
+		#20		deposited= 1; deposit= 200;
+		#20		deposited= 1; deposit=   1;
+		#20		deposited= 0;
 		#20;
-		#10		deposited= 1; deposit= 100;
+// simulate cancel
+		#20		cancel= 1;
+		#20		cancel= 0;
+		#20;
+// simulate purchase
+		#20		deposited= 1; deposit=  10;
+		#20		deposited= 1; deposit= 100;
+		#20		deposited= 1; deposit=  20;
 		#10		deposited= 0;
-		#10		deposited= 1; deposit= 500;
-		#10		deposited= 0;
+		#20		selected= 1; select = 10;
+		#20		selected= 0;
+		#20;
+// simulate maintenance changing price
+		#20		maintenance= 1;
+		#20		selected= 1; select =  0; price=  10;
+		#20		selected= 1; select = 31; price=  10;
+		#20		selected= 1; select =  1; price=  15;
+		#20		selected= 1; select =  2; price=  10;
+		#20		selected= 1; select =  3; price=  20;
+		#20		selected= 1; select =  4; price=  10;
+		#20		selected= 1; select =  5; price=  15;
+		#20		selected= 1; select =  6; price=  15;
+		#20		selected= 1; select =  7; price=  15;
+		#20		selected= 1; select =  8; price=  10;
+		#20		selected= 1; select =  9; price=  10;
+		#20		selected= 1; select = 10; price=  10;
+		#20		selected= 1; select = 11; price=  10;
+		#20		selected= 1; select = 12; price=  10;
+		#20		selected= 1; select = 13; price=  10;
+		#20		selected= 1; select = 14; price=  10;
+		#20		selected= 1; select = 15; price=  10;
+		#20		selected= 1; select = 16; price=  10;
+		#20		selected= 1; select = 17; price=  10;
+		#20		selected= 1; select = 18; price=  10;
+		#20		selected= 1; select = 19; price=  10;
+		#20		selected= 1; select = 20; price=  10;
+		#20		selected= 1; select = 21; price=  10;
+		#20		selected= 1; select = 22; price=  10;
+		#20		selected= 1; select = 23; price=  10;
+		#20		selected= 1; select = 24; price=  10;
+		#20		selected= 1; select = 25; price=  10;
+		#20		selected= 1; select = 26; price=  10;
+		#20		selected= 1; select = 27; price=  10;
+		#20		selected= 1; select = 28; price=  20;
+		#20		selected= 1; select = 29; price=  20;
+		#20		selected= 1; select = 30; price=  20;
+		#20		selected= 1; select = 31; price=  99;
+		#20		selected= 0; maintenance = 0;
+		#20;
+// simulate purchase after changing price, item 30, from RM10 to RM2 (balance RM28)
+		#20		deposited= 1; deposit= 200;
+		#20		deposited= 1; deposit= 500;
+		#20		deposited= 1; deposit= 100;
+		#20		deposited= 0;
+		#20		selected= 1; select= 30;
+		#20		selected= 0;
+		#20		selected= 1; select= 3;
+		#20		selected= 0;
+		#200	$stop;
 	end
 
 endmodule
