@@ -67,6 +67,8 @@ module testbench();
 
 	initial begin
 		rst= 0;
+		deposited= 0; deposit= 0; selected= 0; select= 'bx; price= 0;
+		cancel= 0; maintenance= 0;
 		#10;
 		#10		rst= 1;
 // simulate overflow, insert payment more than threshold value
@@ -85,8 +87,8 @@ module testbench();
 		#20		deposited= 1; deposit= 100;
 		#20		deposited= 1; deposit=  20;
 		#10		deposited= 0;
-		#20		selected= 1; select = 10;
-		#20		selected= 0;
+		#20		selected= 1; select= 10;
+		#20		selected= 0; select= 'bx;
 		#20;
 // simulate maintenance changing price
 		#20		maintenance= 1;
@@ -123,7 +125,7 @@ module testbench();
 		#20		selected= 1; select = 29; price=  20;
 		#20		selected= 1; select = 30; price=  20;
 		#20		selected= 1; select = 31; price=  99;
-		#20		selected= 0; maintenance = 0;
+		#20		selected= 0; select= 'bx; maintenance = 0;
 		#20;
 // simulate purchase after changing price, item 30, from RM10 to RM2 (balance RM28)
 		#20		deposited= 1; deposit= 200;
@@ -131,9 +133,9 @@ module testbench();
 		#20		deposited= 1; deposit= 100;
 		#20		deposited= 0;
 		#20		selected= 1; select= 30;
-		#20		selected= 0;
+		#20		selected= 0; select= 'bx;
 		#20		selected= 1; select= 3;
-		#20		selected= 0;
+		#20		selected= 0; select= 'bx;
 		#200	$stop;
 	end
 

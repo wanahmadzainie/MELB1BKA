@@ -1,0 +1,59 @@
+Resource Usage Summary report for vm
+Wed Jun 11 13:11:50 2014
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Resource Usage Summary
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 458       ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 629       ;
+;     -- 7 input functions                    ; 10        ;
+;     -- 6 input functions                    ; 241       ;
+;     -- 5 input functions                    ; 73        ;
+;     -- 4 input functions                    ; 104       ;
+;     -- <=3 input functions                  ; 201       ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 522       ;
+;                                             ;           ;
+; I/O pins                                    ; 52        ;
+; Total MLAB memory bits                      ; 0         ;
+; Total block memory bits                     ; 160       ;
+; Total DSP Blocks                            ; 0         ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 527       ;
+; Total fan-out                               ; 4332      ;
+; Average fan-out                             ; 3.44      ;
++---------------------------------------------+-----------+
+
+
