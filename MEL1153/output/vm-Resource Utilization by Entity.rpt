@@ -1,0 +1,48 @@
+Resource Utilization by Entity report for vm
+Wed Jun 11 13:11:56 2014
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Resource Utilization by Entity
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                      ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                 ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------------------------------------------------------+--------------+
+; |vm                                       ; 629 (0)           ; 522 (0)      ; 160               ; 0          ; 52   ; 0            ; |vm                                                                 ; work         ;
+;    |cu:myCU|                              ; 18 (18)           ; 7 (7)        ; 0                 ; 0          ; 0    ; 0            ; |vm|cu:myCU                                                         ; work         ;
+;    |du:myDU|                              ; 611 (611)         ; 515 (515)    ; 160               ; 0          ; 0    ; 0            ; |vm|du:myDU                                                         ; work         ;
+;       |altsyncram:mem[0][12]__2|          ; 0 (0)             ; 0 (0)        ; 64                ; 0          ; 0    ; 0            ; |vm|du:myDU|altsyncram:mem[0][12]__2                                ; work         ;
+;          |altsyncram_ovm1:auto_generated| ; 0 (0)             ; 0 (0)        ; 64                ; 0          ; 0    ; 0            ; |vm|du:myDU|altsyncram:mem[0][12]__2|altsyncram_ovm1:auto_generated ; work         ;
+;       |altsyncram:mem[0][9]__1|           ; 0 (0)             ; 0 (0)        ; 96                ; 0          ; 0    ; 0            ; |vm|du:myDU|altsyncram:mem[0][9]__1                                 ; work         ;
+;          |altsyncram_qvm1:auto_generated| ; 0 (0)             ; 0 (0)        ; 96                ; 0          ; 0    ; 0            ; |vm|du:myDU|altsyncram:mem[0][9]__1|altsyncram_qvm1:auto_generated  ; work         ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+---------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
